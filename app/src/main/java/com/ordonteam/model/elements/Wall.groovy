@@ -9,23 +9,31 @@ class Wall {
 
     final Point wEnd
 
+//    Wall(){
+//
+//    }
+//    Wall(Point a, Point b){
+//        wStart = a
+//        wEnd = b
+//    }
+
     @Override
     boolean equals(o) {
-        if (is(this,o)) return true
+//        if (this.is(o)) return true
         if (getClass() != o.class) return false
 
         Wall wall = (Wall) o
 
-        if (wEnd != wall.wEnd || wEnd != wall.wStart) return false
-        if (wStart != wall.wStart || wStart != wall.wEnd) return false
+        if (wEnd != wall.wEnd && wEnd != wall.wStart) return false
+        if (wStart != wall.wStart && wStart != wall.wEnd) return false
 
         return true
     }
 
     int hashCode() {
         int result
-        result = wStart.hashCode()
-        result = 31 * result + wEnd.hashCode()
+        result = wStart.hashCode() + wEnd.hashCode()
+        result = 31 * result + wEnd.hashCode() + wStart.hashCode()
         return result
     }
 }

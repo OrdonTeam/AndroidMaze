@@ -16,4 +16,18 @@ class WallSpec extends RoboSpecification {
         then:
         firstWall == firstWallReversed
     }
+
+    def "not equal walls shouldnt be the same"() {
+        given:
+        Point pA = new Point(0, 0)
+        Point pB = new Point(1, 1)
+        Point pC = new Point(2, 2)
+
+        when:
+        Wall firstWall = new Wall(pA, pB)
+        Wall otherWall = new Wall(pA, pC)
+
+        then:
+        firstWall != otherWall
+    }
 }
