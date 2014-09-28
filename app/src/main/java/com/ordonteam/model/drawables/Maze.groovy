@@ -1,5 +1,4 @@
 package com.ordonteam.model.drawables
-
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -15,7 +14,7 @@ class Maze implements Drawable {
 
     Set<Wall> walls = new HashSet<>();
 
-    public Maze(int width, int height) {
+    public Maze(int width, int height){
         this.width = width
         this.height = height
     }
@@ -25,8 +24,8 @@ class Maze implements Drawable {
         paint.setColor(Color.GREEN)
         paint.setStrokeWidth(2)
 
-        float xScale = (float) canvas.width / (width)
-        float yScale = (float) canvas.height / (height)
+        float xScale = (float) canvas.width/(width)
+        float yScale = (float) canvas.height/(height)
         float scale = Math.min(xScale, yScale)
         paint.setColor(Color.RED)
         walls.each { wall ->
