@@ -24,9 +24,10 @@ class Bot implements Drawable {
         paint.setColor(Color.BLUE)
 
         double fieldWidth = Math.min((double) canvas.width / width, (double) canvas.height / height)
-        path.each { point ->
-            canvas.drawRect((float) point.getX() * fieldWidth,
-                    (float) point.getY() * fieldWidth,
+        ConcurrentLinkedQueue<Point> clq = path as ConcurrentLinkedQueue;
+        clq.each { point ->
+            canvas.drawRect((float) point.x * fieldWidth,
+                    (float) point.y * fieldWidth,
                     (float) point.x * fieldWidth + fieldWidth,
                     (float) point.y * fieldWidth + fieldWidth,
                     paint)
