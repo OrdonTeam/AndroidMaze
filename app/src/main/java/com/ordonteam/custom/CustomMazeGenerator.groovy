@@ -36,44 +36,39 @@ class CustomMazeGenerator extends MazeGenerator {
 
             if (unvisitedNeighbours.size() > 0) {
                 visitedCounter++
-                Point randomUnvisitedNeighbour = unvisitedNeighbours.toList().get(rand.nextInt(unvisitedNeighbours.size()))
+                Point randomUnvisitedNeighbour = getRandom(unvisitedNeighbours)
                 stack.push(currentPoint)
-                this.maze.removeWall(Point.getCommonWall(currentPoint, randomUnvisitedNeighbour))
+                maze.removeWallBetweenPoints(currentPoint, randomUnvisitedNeighbour)
                 currentPoint = randomUnvisitedNeighbour
             } else {
                 currentPoint = stack.pop()
             }
-
         }
 
-        return this.maze
+        return maze
+    }
+
+    private Point getRandom(Set<Point> unvisitedNeighbours) {
+        return unvisitedNeighbours.toList().get(rand.nextInt(unvisitedNeighbours.size()))
     }
 
     private Point rollStartPoint() {
-        new Point(this.rand.nextInt(width), this.rand.nextInt(height));
+        new Point(rand.nextInt(width), rand.nextInt(height));
     }
 
     private void createVerticalLines() {
-        //create vertical lines
         for (int x = 0; x < width + 1; x++) {
             for (int y = 0; y < height; y++) {
-                this.maze.addWall(new Point(x, y), new Point(x, y + 1))
+                maze.addWall(new Point(x, y), new Point(x, y + 1))
             }
         }
     }
 
     private void createHorizontalLines() {
-        //create horizontal lines
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height + 1; y++) {
                 maze.addWall(new Point(x, y), new Point(x + 1, y))
             }
         }
-    }
-
-    Point getRandomNeighbour(Point point) {
-        Random rand = new Random()
-        List<Point> neighbours = point.getNeighbours().toList()
-        return neighbours.get(rand.nextInt(neighbours.size()))
     }
 }

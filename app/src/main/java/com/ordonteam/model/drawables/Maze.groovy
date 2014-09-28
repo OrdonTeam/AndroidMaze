@@ -21,8 +21,6 @@ class Maze implements Drawable {
     void draw(Canvas canvas) {
         Paint paint = new Paint()
         paint.setColor(Color.RED)
-//        canvas.drawRect(0, 0, 100, 100, paint)
-//        canvas.drawText("This is Maze", 0, 20, new Paint())
 
         int scale = 40
         walls.each {
@@ -53,5 +51,9 @@ class Maze implements Drawable {
 
     boolean pointHasAllWalls(Point point) {
         return walls.containsAll(point.getPossibleWalls())
+    }
+
+    void removeWallBetweenPoints(Point p1, Point p2) {
+        walls.remove(Point.getCommonWall(p1, p2))
     }
 }
