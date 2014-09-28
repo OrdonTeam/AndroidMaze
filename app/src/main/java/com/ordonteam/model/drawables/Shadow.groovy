@@ -6,10 +6,12 @@ import android.graphics.Paint
 import com.ordonteam.commons.Drawable
 import com.ordonteam.model.elements.Point
 
+import java.util.concurrent.ConcurrentHashMap
+
 import static com.ordonteam.model.elements.Point.p
 
 class Shadow implements Drawable {
-    public Map<Point, Boolean> fields = new HashMap<>()
+    public Map<Point, Boolean> fields = new ConcurrentHashMap<>()
     private int width
     private int height
 
