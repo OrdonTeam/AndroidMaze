@@ -14,7 +14,7 @@ class Player implements Drawable {
     final int width
     final int height
 
-    Point point = new Point(3,3)
+    Point point = new Point(0,0)
 
     int getX(){
         return point.x
