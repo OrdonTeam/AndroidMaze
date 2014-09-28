@@ -1,8 +1,12 @@
 package com.ordonteam.custom
 
 import android.content.Intent
+import android.view.View
 import android.widget.Button
+import android.widget.CompoundButton
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.SeekBar
+import android.widget.Switch
 import android.widget.TextView
 import com.ordonteam.commons.CenteredLayout
 import com.ordonteam.commons.NamedProgressBar
@@ -26,6 +30,20 @@ class CustomLayout extends CenteredLayout {
         addView(widthProgressBar)
         addView(heightProgressBar)
         addView(botLevelProgressBar)
+
+        TextView shadowHeader = new TextView(customActivity)
+        shadowHeader.setText("Shadows:")
+        addView(shadowHeader)
+        Button shadowButton = new Button(customActivity)
+        shadowButton.setText("ON")
+        shadowButton.setOnClickListener({
+                if(shadowButton.getText() == 'ON' ){
+                    shadowButton.setText("OFF")
+                } else {
+                    shadowButton.setText("ON")
+                }
+        })
+        addView(shadowButton)
 
         Button button = new Button(customActivity)
         button.setText('Create Level')
