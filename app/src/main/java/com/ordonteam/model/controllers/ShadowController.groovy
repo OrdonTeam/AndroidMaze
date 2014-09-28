@@ -10,7 +10,7 @@ class ShadowController extends DrawableController {
 
     ShadowController(Shadow shadow) {
         super(shadow)
-
+        this.shadow = shadow
     }
 
     public void show(Point point) {

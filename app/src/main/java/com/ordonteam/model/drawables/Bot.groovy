@@ -5,8 +5,10 @@ import android.graphics.Color
 import android.graphics.Paint
 import com.ordonteam.commons.Drawable
 import com.ordonteam.model.elements.Point
+import groovy.transform.Canonical
 import groovy.transform.CompileStatic
 
+@Canonical
 @CompileStatic
 class Bot implements Drawable {
 
@@ -23,8 +25,8 @@ class Bot implements Drawable {
         path.each { point ->
             canvas.drawRect((float) point.getX() * fieldWidth,
                     (float) point.getY() * fieldWidth,
-                    (float) point.y * fieldWidth + fieldWidth / 2,
-                    (float) fieldWidth / 2,
+                    (float) point.x * fieldWidth + fieldWidth,
+                    (float) point.y * fieldWidth + fieldWidth,
                     paint)
         }
     }
