@@ -3,6 +3,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import com.ordonteam.commons.Drawable
+import com.ordonteam.model.elements.Point
 import com.ordonteam.model.elements.Wall
 import groovy.transform.CompileStatic
 
@@ -22,11 +23,15 @@ class Maze implements Drawable {
         canvas.drawText("This is Maze", 0, 20, new Paint())
     }
 
-    public addWall(){
-        walls.add(new Wall())
+    public void addWall(Point a, Point b) {
+        walls.add(new Wall(a, b))
     }
 
-    public removeWall(){
-        walls.remove(new Wall())
+    public void removeWall(Wall wall) {
+        walls.remove(wall)
+    }
+
+    public void removeWall(Point a, Point b) {
+        walls.remove(new Wall(a, b))
     }
 }

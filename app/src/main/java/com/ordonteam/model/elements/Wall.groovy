@@ -14,7 +14,7 @@ class Wall {
 
     @Override
     boolean equals(o) {
-//        if (this.is(o)) return true
+        if (this.is(o)) return true
         if (getClass() != o.class) return false
 
         Wall wall = (Wall) o
