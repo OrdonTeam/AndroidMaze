@@ -3,7 +3,7 @@ package com.ordonteam.model.drawables
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.Point
+import com.ordonteam.model.elements.Point
 import com.ordonteam.commons.Drawable
 import groovy.transform.CompileStatic
 
@@ -21,7 +21,7 @@ class Player implements Drawable {
     }
 
     void moveRight() {
-        point = new Point(point.x,point.y+1)
+        point = point.right
     }
 
     void draw(Canvas canvas) {
@@ -32,14 +32,14 @@ class Player implements Drawable {
     }
 
     void moveUp() {
-        x--
+        point= point.up
     }
 
     void moveLeft() {
-        y--
+        point = point.left
     }
 
     void moveDown() {
-        x++
+        point = point.down
     }
 }

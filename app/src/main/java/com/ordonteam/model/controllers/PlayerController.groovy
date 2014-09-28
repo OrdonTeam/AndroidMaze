@@ -1,5 +1,6 @@
 package com.ordonteam.model.controllers
 
+import com.ordonteam.commons.DrawableView
 import com.ordonteam.model.elements.Point
 import android.view.MotionEvent
 import android.view.View
@@ -27,44 +28,47 @@ class PlayerController extends DrawableController implements View.OnTouchListene
 
     @Override
     boolean onTouch(View v, MotionEvent event) {
-        movePlayer(event)
+        int playerPositionX = (int) drawableView.getWidth()*player.x/maze.getWidth()
+        int playerPositionY = (int) drawableView.getHeight()*player.y/maze.getHeight()
+        Point playerPosition = new Point(playerPositionX,playerPositionY)
+        movePlayer(event, playerPosition)
         invalidate()
         return false
     }
 
     private void tryToMovePlayerUp(){
-        if(!maze.isWallBetween(new Point(player.x,player.y),new Point(player.x-1,player.y))){
+        if(!maze.isWallBetween(player.point,player.point.up)){
             player.moveUp()
         }
     }
 
     private void tryToMovePlayerLeft(){
-        if(!maze.isWallBetween(new Point(player.x,player.y),new Point(player.x,player.y-1))){
+        if(!maze.isWallBetween(player.point,player.point.left)){
             player.moveLeft()
         }
     }
 
     private void tryToMovePlayerRight(){
-        if(!maze.isWallBetween(new Point(player.x,player.y),new Point(player.x,player.y+1))){
+        if(!maze.isWallBetween(player.point,player.point.right)){
             player.moveRight()
         }
     }
 
     private void tryToMovePlayerDown(){
-        if(!maze.isWallBetween(new Point(player.x,player.y),new Point(player.x+1,player.y))){
+        if(!maze.isWallBetween(player.point,player.point.down)){
             player.moveDown()
         }
     }
 
-    private void movePlayer(MotionEvent event) {
-        if (event.y > event.x - player.x) {
-            if (event.y > 0 - event.x - player.y) {
+    private void movePlayer(MotionEvent event, Point playerPosition) {
+        if (event.y > event.x - playerPosition.x) {
+            if (event.y > 0 - event.x - playerPosition.y) {
                 tryToMovePlayerUp()
             } else {
                 tryToMovePlayerLeft()
             }
         } else {
-            if (event.y > 0 - event.x - player.y) {
+            if (event.y > 0 - event.x - playerPosition.y) {
                 tryToMovePlayerRight()
             } else {
                 tryToMovePlayerDown()

@@ -9,6 +9,8 @@ import groovy.transform.CompileStatic
 
 @CompileStatic
 class Maze implements Drawable {
+    final int width = 10;
+    final int height = 10;
 
     Set<Wall> walls = new HashSet<>();
 
@@ -42,9 +44,9 @@ class Maze implements Drawable {
     }
 
     boolean isWallBetween(Point firstPoint, Point secondPoint) {
-        return true
+        return false
     }
-    
+
     boolean isFieldAfterWallUndiscovered(Wall wall) {
         false
     }

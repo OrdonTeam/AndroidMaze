@@ -8,7 +8,7 @@ import groovy.transform.CompileStatic
 @CompileStatic
 abstract class DrawableController {
     protected Drawable drawable
-    private DrawableView drawableView
+    protected DrawableView drawableView
 
     DrawableController(Drawable drawable) {
         this.drawable = drawable
