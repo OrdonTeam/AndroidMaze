@@ -51,7 +51,7 @@ class MazeTimeView extends Button implements Runnable, View.OnClickListener {
             post {
                 setText("$mins:$secsString:$milliseconds")
             }
-            thread.sleep(100);
+            Thread.sleep(100);
         }
     }
 }
