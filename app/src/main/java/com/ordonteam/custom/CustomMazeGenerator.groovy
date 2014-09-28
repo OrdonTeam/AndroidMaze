@@ -10,7 +10,7 @@ import groovy.transform.CompileStatic
 @CompileStatic
 class CustomMazeGenerator extends MazeGenerator {
 
-    private Maze maze
+    protected Maze maze
     final int width
     final int height
     private Random rand = new Random()
