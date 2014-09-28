@@ -1,12 +1,7 @@
 package com.ordonteam.custom
 
 import android.content.Intent
-import android.view.View
 import android.widget.Button
-import android.widget.CompoundButton
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.SeekBar
-import android.widget.Switch
 import android.widget.TextView
 import com.ordonteam.commons.CenteredLayout
 import com.ordonteam.commons.NamedProgressBar
@@ -15,8 +10,8 @@ import groovy.transform.CompileStatic
 
 @CompileStatic
 class CustomLayout extends CenteredLayout {
-    private int MAX_WIDTH = 100
-    private int MAX_HEIGTH = 2
+    private int MAX_WIDTH = 50
+    private int MAX_HEIGHT = 100
     private int MAX_BOT_LEVEL = 10
     private NamedProgressBar widthProgressBar
     private NamedProgressBar heightProgressBar
@@ -25,7 +20,7 @@ class CustomLayout extends CenteredLayout {
     public CustomLayout(CustomActivity customActivity) {
         super(customActivity)
         widthProgressBar = new NamedProgressBar(customActivity, "Width", MAX_WIDTH)
-        heightProgressBar = new NamedProgressBar(customActivity, "Height", MAX_HEIGTH)
+        heightProgressBar = new NamedProgressBar(customActivity, "Height", MAX_HEIGHT)
         botLevelProgressBar = new NamedProgressBar(customActivity, "Bot Level", MAX_BOT_LEVEL)
         addView(widthProgressBar)
         addView(heightProgressBar)
@@ -46,10 +41,10 @@ class CustomLayout extends CenteredLayout {
         addView(shadowButton)
 
         Button button = new Button(customActivity)
-        button.setText('Create Level')
+        button.setText('               Create Level               ')
         button.setOnClickListener({
             Intent intent = new Intent(context, MazeActivity.class)
-            intent.putExtra('MazeGenerator', new CustomMazeGenerator())
+            intent.putExtra('MazeGenerator', new CustomMazeGenerator(widthProgressBar.value, heightProgressBar.value))
             customActivity.startActivity(intent)
         })
         addView(button)
