@@ -9,24 +9,25 @@ import groovy.transform.CompileStatic
 
 @CompileStatic
 class Maze implements Drawable {
-    final int width = 10;
-    final int height = 10;
+    final int width;
+    final int height;
 
     Set<Wall> walls = new HashSet<>();
 
-    public Maze(){
-
+    public Maze(int width, int height){
+        this.width = width
+        this.height = height
     }
 
     void draw(Canvas canvas) {
         Paint paint = new Paint()
         paint.setColor(Color.RED)
-//        canvas.drawRect(0, 0, 100, 100, paint)
-//        canvas.drawText("This is Maze", 0, 20, new Paint())
 
-        int scale = 40
-        walls.each {
-            canvas.drawLine(it.wStart.x * scale, it.wStart.y * scale, it.wEnd.x * scale, it.wEnd.y * scale, paint);
+        int xScale = (int) canvas.getWidth()/(width)
+        int yScale = (int) canvas.getHeight()/(height)
+        int scale = Math.min(xScale, yScale)
+        walls.each { wall ->
+            wall.draw(canvas, scale, paint)
         }
 
     }

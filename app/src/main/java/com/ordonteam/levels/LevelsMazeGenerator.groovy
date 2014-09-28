@@ -8,6 +8,6 @@ import groovy.transform.CompileStatic
 class LevelsMazeGenerator extends MazeGenerator {
     @Override
     Maze generate() {
-        return new Maze()
+        return new Maze(0,0)
     }
 }

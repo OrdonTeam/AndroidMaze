@@ -1,5 +1,7 @@
 package com.ordonteam.model.elements
 
+import android.graphics.Canvas
+import android.graphics.Paint
 import groovy.transform.Canonical
 import groovy.transform.CompileStatic
 
@@ -31,5 +33,9 @@ class Wall {
 
     int hashCode() {
         return wStart.hashCode() + wEnd.hashCode()
+    }
+
+    void draw(Canvas canvas, int scale, Paint paint) {
+        canvas.drawLine(wStart.x * scale, wStart.y * scale, wEnd.x * scale, wEnd.y * scale, paint)
     }
 }
