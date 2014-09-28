@@ -5,12 +5,16 @@ import android.graphics.Color
 import android.graphics.Paint
 import com.ordonteam.model.elements.Point
 import com.ordonteam.commons.Drawable
+import groovy.transform.Canonical
 import groovy.transform.CompileStatic
 
 @CompileStatic
+@Canonical
 class Player implements Drawable {
+    final int width
+    final int height
 
-    Point point = new Point(0,0)
+    Point point = new Point(3,3)
 
     int getX(){
         return point.x
@@ -27,8 +31,11 @@ class Player implements Drawable {
     void draw(Canvas canvas) {
         Paint paint = new Paint()
         paint.setColor(Color.GREEN)
-        canvas.drawRect(100 + x, 100 + y, 200 + x, 200 + y, paint)
-        canvas.drawText("This is Player", 100 + x, 120 + y, new Paint())
+        double fieldWidth = Math.min( (double)canvas.width / width, (double)canvas.height / height)
+        canvas.drawCircle((float)point.x*fieldWidth+fieldWidth/2,
+                (float)point.y*fieldWidth+fieldWidth/2,
+                (float)fieldWidth/2,
+                paint)
     }
 
     void moveUp() {
