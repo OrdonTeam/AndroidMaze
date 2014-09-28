@@ -13,6 +13,10 @@ class Shadow implements Drawable {
     private int width
     private int height
 
+    static Shadow noShadow(){
+        return new Shadow(0,0);
+    }
+
     Shadow(int width, int height) {
         this.height = height
         this.width = width

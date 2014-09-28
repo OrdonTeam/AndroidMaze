@@ -1,11 +1,9 @@
 package com.ordonteam.model.controllers
-
-import com.ordonteam.commons.DrawableView
-import com.ordonteam.model.elements.Point
 import android.view.MotionEvent
 import android.view.View
 import com.ordonteam.model.drawables.Maze
 import com.ordonteam.model.drawables.Player
+import com.ordonteam.model.elements.Point
 import groovy.transform.CompileStatic
 
 @CompileStatic
@@ -23,6 +21,7 @@ class PlayerController extends DrawableController implements View.OnTouchListene
     void start(Maze maze, ShadowController shadowController, View layout) {
         this.shadowController = shadowController
         this.maze = maze
+        shadowController.show(player.point)
         layout.setOnTouchListener(this)
     }
 

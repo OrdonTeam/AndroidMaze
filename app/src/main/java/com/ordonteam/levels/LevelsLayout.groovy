@@ -51,12 +51,8 @@ class LevelsLayout extends CenteredLayout {
             intent.putExtra('MazeGenerator', new CustomMazeGenerator(p.x, p.y));
             levelsActivity.startActivity(intent);
         })
-        //Drawable picture = getResources().getDrawable(R.drawable.ja);
-
         button.setHeight(100);
         button.setWidth(100);
-        //button.setBackground(picture);
-
         return button;
     }
 }

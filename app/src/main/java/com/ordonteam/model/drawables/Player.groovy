@@ -31,7 +31,7 @@ class Player implements Drawable {
     void draw(Canvas canvas) {
         Paint paint = new Paint()
         paint.setColor(Color.GREEN)
-        double fieldWidth = Math.min( (double)canvas.width / width, (double)canvas.height / height)
+        int fieldWidth = Math.min( (int)(canvas.width / width), (int)(canvas.height / height))
         canvas.drawCircle((float)point.x*fieldWidth+fieldWidth/2,
                 (float)point.y*fieldWidth+fieldWidth/2,
                 (float)fieldWidth/2,
