@@ -8,12 +8,14 @@ import com.ordonteam.model.elements.Point
 import com.ordonteam.model.elements.Wall
 import groovy.transform.CompileStatic
 
+import java.util.concurrent.ConcurrentHashMap
+
 @CompileStatic
 class Maze implements Drawable {
     final int width;
     final int height;
 
-    Set<Wall> walls = new HashSet<>();
+    Set<Wall> walls = new Collections().newSetFromMap(new ConcurrentHashMap<Wall, Boolean>());
 
     public Maze(int width, int height) {
         this.width = width
