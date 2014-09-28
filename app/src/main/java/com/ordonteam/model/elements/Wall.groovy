@@ -1,7 +1,9 @@
 package com.ordonteam.model.elements
 
 import groovy.transform.Canonical
+import groovy.transform.CompileStatic
 
+@CompileStatic
 @Canonical
 class Wall {
 
@@ -9,13 +11,6 @@ class Wall {
 
     final Point wEnd
 
-//    Wall(){
-//
-//    }
-//    Wall(Point a, Point b){
-//        wStart = a
-//        wEnd = b
-//    }
 
     @Override
     boolean equals(o) {
