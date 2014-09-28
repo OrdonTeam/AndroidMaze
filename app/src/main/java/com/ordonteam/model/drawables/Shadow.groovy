@@ -14,7 +14,9 @@ class Shadow implements Drawable {
     private int height
 
     static Shadow noShadow(){
-        return new Shadow(0,0);
+        Shadow shadow = new Shadow(1, 1)
+        shadow.show(p(0,0))
+        return shadow;
     }
 
     Shadow(int width, int height) {
