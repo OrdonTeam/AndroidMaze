@@ -73,5 +73,6 @@ class PlayerController extends DrawableController implements View.OnTouchListene
                 tryToMovePlayerDown()
             }
         }
+        shadowController.show(player.point)
     }
 }

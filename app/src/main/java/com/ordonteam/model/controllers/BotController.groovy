@@ -1,6 +1,5 @@
 package com.ordonteam.model.controllers
 
-import android.util.Log
 import com.ordonteam.commons.UtilGroovy
 import com.ordonteam.model.drawables.Bot
 import com.ordonteam.model.drawables.Maze
@@ -40,7 +39,6 @@ class BotController extends DrawableController implements Runnable {
     void run() {
         bot.moveTo(new Point(0, 0))
         while (bot.current != maze.getFinish()) {
-            Log.d("kasper", bot.current.toString() + " " + maze.getFinish().toString())
             step()
             invalidate()
             sleep(200)

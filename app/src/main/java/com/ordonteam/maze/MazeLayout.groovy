@@ -27,8 +27,8 @@ class MazeLayout extends LinearLayout {
         //This element should be passed from outside
         BotController botController = new BotController(new Bot(maze.width,maze.height))
         PlayerController playerController = new PlayerController(new Player(maze.width,maze.height))
-//        ShadowController shadowController = new ShadowController(new Shadow(maze.width,maze.height))
-        ShadowController shadowController = new ShadowController(Shadow.noShadow())
+        ShadowController shadowController = new ShadowController(new Shadow(maze.width, maze.height))
+//        ShadowController shadowController = new ShadowController(Shadow.noShadow())
         //end
         AccumulatedLayout layout = anAccumulatedLayout(mazeActivity)
                 .with(botController)
