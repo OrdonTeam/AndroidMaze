@@ -17,6 +17,7 @@ class LevelsLayout extends CenteredLayout {
 
         makeButtons(levelsActivity).each { View view ->
             grid.addView(view);
+
         }
 
         addView(grid);

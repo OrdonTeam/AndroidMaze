@@ -19,8 +19,14 @@ class Maze implements Drawable {
     void draw(Canvas canvas) {
         Paint paint = new Paint()
         paint.setColor(Color.RED)
-        canvas.drawRect(0, 0, 100, 100, paint)
-        canvas.drawText("This is Maze", 0, 20, new Paint())
+//        canvas.drawRect(0, 0, 100, 100, paint)
+//        canvas.drawText("This is Maze", 0, 20, new Paint())
+
+        int scale = 40
+        walls.each {
+            canvas.drawLine(it.wStart.x * scale, it.wStart.y * scale, it.wEnd.x * scale, it.wEnd.y * scale, paint);
+        }
+
     }
 
     public void addWall(Point a, Point b) {
@@ -33,5 +39,13 @@ class Maze implements Drawable {
 
     public void removeWall(Point a, Point b) {
         walls.remove(new Wall(a, b))
+    }
+
+    boolean isFieldAfterWallUndiscovered(Wall wall) {
+        false
+    }
+
+    boolean pointHasAllWalls(Point point) {
+        return walls.containsAll(point.getPossibleWalls())
     }
 }
