@@ -1,5 +1,6 @@
 package com.ordonteam.custom
 
+import com.ordonteam.commons.UtilGroovy
 import com.ordonteam.model.MazeGenerator
 import com.ordonteam.model.drawables.Maze
 import com.ordonteam.model.elements.Point
@@ -42,7 +43,7 @@ class CustomMazeGenerator extends MazeGenerator {
 
             if (unvisitedNeighbours.size() > 0) {
                 visitedCounter++
-                Point randomUnvisitedNeighbour = getRandom(unvisitedNeighbours)
+                Point randomUnvisitedNeighbour = UtilGroovy.getRandom(unvisitedNeighbours, rand)
                 stack.push(currentPoint)
                 maze.removeWallBetweenPoints(currentPoint, randomUnvisitedNeighbour)
                 currentPoint = randomUnvisitedNeighbour

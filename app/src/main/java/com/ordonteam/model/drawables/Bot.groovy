@@ -4,23 +4,40 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import com.ordonteam.commons.Drawable
+import com.ordonteam.model.elements.Point
 import groovy.transform.CompileStatic
 
 @CompileStatic
 class Bot implements Drawable {
 
-    int x = 1;
-    int y = 1;
+    private Stack<Point> path = new Stack<>()
+    int width
+    int height
 
     @Override
     void draw(Canvas canvas) {
         Paint paint = new Paint()
         paint.setColor(Color.BLUE)
-        canvas.drawRect(50 + x, 50 + y, 150 + x, 150 + y, paint)
-        canvas.drawText("This is Bot", 50 + x, 70 + y, new Paint())
+
+        double fieldWidth = Math.min((double) canvas.width / width, (double) canvas.height / height)
+        path.each { point ->
+            canvas.drawRect((float) point.getX() * fieldWidth,
+                    (float) point.getY() * fieldWidth,
+                    (float) point.y * fieldWidth + fieldWidth / 2,
+                    (float) fieldWidth / 2,
+                    paint)
+        }
     }
 
-    void moveRight() {
-        x++;
+    Point getCurrent() {
+        return path.peek()
+    }
+
+    void moveTo(Point point) {
+        path.push(point)
+    }
+
+    void goBack() {
+        path.pop()
     }
 }
