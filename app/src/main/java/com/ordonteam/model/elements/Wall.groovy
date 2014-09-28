@@ -26,9 +26,6 @@ class Wall {
     }
 
     int hashCode() {
-        int result
-        result = wStart.hashCode() + wEnd.hashCode()
-        result = 31 * result + wEnd.hashCode() + wStart.hashCode()
-        return result
+        return wStart.hashCode() + wEnd.hashCode()
     }
 }
