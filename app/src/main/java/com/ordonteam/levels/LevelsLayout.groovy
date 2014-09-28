@@ -17,7 +17,6 @@ class LevelsLayout extends CenteredLayout {
 
         makeButtons(levelsActivity).each { View view ->
             grid.addView(view);
-
         }
 
         addView(grid);
@@ -33,10 +32,17 @@ class LevelsLayout extends CenteredLayout {
         Button button = new Button(levelsActivity)
         button.setText(name)
         button.setOnClickListener({
-            Intent intent = new Intent(context, MazeActivity.class)
-            intent.putExtra('MazeGenerator', new LevelsMazeGenerator())
-            levelsActivity.startActivity(intent)
+            Intent intent = new Intent(context, MazeActivity.class);
+            intent.putExtra('MazeGenerator', new LevelsMazeGenerator());
+            levelsActivity.startActivity(intent);
         })
+//        setBackgroundDrawable();
+        //Drawable picture = getResources().getDrawable(R.drawable.ja);
+
+        button.setHeight(150);
+        button.setWidth(150);
+        //button.setBackground(picture);
+
         return button;
     }
 }
