@@ -23,8 +23,8 @@ class Maze implements Drawable {
         Paint paint = new Paint()
         paint.setColor(Color.GREEN)
 
-        float xScale = (float) canvas.getWidth()/(width)
-        float yScale = (float) canvas.getHeight()/(height)
+        float xScale = (float) canvas.width/(width)
+        float yScale = (float) canvas.height/(height)
         float scale = Math.min(xScale, yScale)
         paint.setColor(Color.RED)
         walls.each { wall ->
