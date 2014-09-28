@@ -30,4 +30,36 @@ class WallSpec extends RoboSpecification {
         then:
         firstWall != otherWall
     }
+
+    def "should return proper possible walls"() {
+        given:
+        Point pA = new Point(0, 0);
+        //possible walls
+        Wall w1 = new Wall(new Point(0, 0), new Point(0, 1))
+        Wall w2 = new Wall(new Point(0, 0), new Point(1, 0))
+        Wall w3 = new Wall(new Point(1, 0), new Point(1, 1))
+        Wall w4 = new Wall(new Point(0, 1), new Point(1, 1))
+
+        when:
+        List<Wall> walls = pA.getPossibleWalls()
+
+        then:
+        walls.containsAll([w1, w2, w3, w4])
+    }
+
+    def "should return proper neighbours"() {
+        given:
+        Point pA = new Point(0, 0)
+        //neighbours
+        Point nUp = new Point(0, -1)
+        Point nDown = new Point(0, 1)
+        Point nRight = new Point(1, 0)
+        Point nLeft = new Point(-1, 0)
+
+        when:
+        Set<Point> neighbours = pA.getNeighbours()
+
+        then:
+        neighbours.containsAll([nUp, nDown, nRight, nLeft])
+    }
 }
