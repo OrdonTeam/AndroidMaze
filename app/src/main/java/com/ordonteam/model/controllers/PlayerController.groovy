@@ -60,15 +60,15 @@ class PlayerController extends DrawableController implements View.OnTouchListene
     }
 
     private void movePlayer(MotionEvent event, Point playerPosition) {
-        if (event.y > event.x - playerPosition.x) {
-            if (event.y > 0 - event.x - playerPosition.y) {
+        if (event.y < event.x * drawableView.getHeight()/drawableView.getWidth()) {
+            if (event.y < 0 - event.x * drawableView.getHeight()/drawableView.getWidth() + drawableView.getHeight()) {
                 tryToMovePlayerUp()
             } else {
-                tryToMovePlayerLeft()
+                tryToMovePlayerRight()
             }
         } else {
-            if (event.y > 0 - event.x - playerPosition.y) {
-                tryToMovePlayerRight()
+            if (event.y < 0 - event.x * drawableView.getHeight()/drawableView.getWidth() + drawableView.getHeight()) {
+                tryToMovePlayerLeft()
             } else {
                 tryToMovePlayerDown()
             }

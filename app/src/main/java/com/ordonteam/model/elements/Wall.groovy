@@ -35,7 +35,7 @@ class Wall {
         return wStart.hashCode() + wEnd.hashCode()
     }
 
-    void draw(Canvas canvas, int scale, Paint paint) {
-        canvas.drawLine(wStart.x * scale, wStart.y * scale, wEnd.x * scale, wEnd.y * scale, paint)
+    void draw(Canvas canvas, float scale, Paint paint) {
+        canvas.drawLine((float)wStart.x * scale, (float)wStart.y * scale, (float)wEnd.x * scale, (float)wEnd.y * scale, paint)
     }
 }
