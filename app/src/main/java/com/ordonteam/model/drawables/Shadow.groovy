@@ -24,27 +24,14 @@ class Shadow implements Drawable {
     }
 
     void show(Point point) {
-        fields.put(point, true)
-        fields.put(point.up, true)
-        fields.put(point.down, true)
-        fields.put(point.left, true)
-        fields.put(point.right, true)
-        fields.put(point.up.left, true)
-        fields.put(point.up.right, true)
-        fields.put(point.down.left, true)
-        fields.put(point.down.right, true)
+        show(point,1)
     }
 
     void show(Point point, int range){
-        show(point)
-        if(range == 2){
-            showOneMore(point)
-        } else if(range == 3){
-            showTwoMore(point)
-        } else if(range == 4){
-            showThreeMore(point)
-        } else if(range ==5 ){
-            showFourMore(point)
+        for (int x = point.x-range; x <= point.x+range; x++) {
+            for (int y = point.y-range; y <= point.y+range; y++) {
+                fields.put(p(x, y), true)
+            }
         }
     }
 
@@ -58,16 +45,5 @@ class Shadow implements Drawable {
                 canvas.drawRect(point.getX()*fieldSize, point.getY()*fieldSize, (point.getX()*fieldSize) + fieldSize, point.getY()*fieldSize + fieldSize, paint)
             }
         }
-    }
-
-    void showOneMore(Point point) {
-        fields.put(point.up, true)
-        fields.put(point.down, true)
-        fields.put(point.left, true)
-        fields.put(point.right, true)
-        fields.put(point.up.left, true)
-        fields.put(point.up.right, true)
-        fields.put(point.down.left, true)
-        fields.put(point.down.right, true)
     }
 }
