@@ -9,7 +9,7 @@ import com.ordonteam.model.elements.Point
 import static com.ordonteam.model.elements.Point.p
 
 class Shadow implements Drawable {
-    public Map<Point, Boolean> fields
+    public Map<Point, Boolean> fields = new HashMap<>()
     private int width
     private int height
 
