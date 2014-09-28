@@ -34,4 +34,8 @@ class Maze implements Drawable {
     public void removeWall(Point a, Point b) {
         walls.remove(new Wall(a, b))
     }
+
+    boolean isWallBetween(Point firstPoint, Point secondPoint) {
+        return true
+    }
 }

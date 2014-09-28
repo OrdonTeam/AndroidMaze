@@ -1,4 +1,5 @@
 package com.ordonteam.model.drawables
+
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -28,5 +29,17 @@ class Player implements Drawable {
         paint.setColor(Color.GREEN)
         canvas.drawRect(100 + x, 100 + y, 200 + x, 200 + y, paint)
         canvas.drawText("This is Player", 100 + x, 120 + y, new Paint())
+    }
+
+    void moveUp() {
+        x--
+    }
+
+    void moveLeft() {
+        y--
+    }
+
+    void moveDown() {
+        x++
     }
 }
