@@ -18,10 +18,9 @@ class BotController extends DrawableController implements Runnable {
     private Map<Point, Boolean> fields = new HashMap<>()
 
 
-    BotController(Bot bot, ShadowController shadowController) {
+    BotController(Bot bot) {
         super(bot)
         this.bot = bot
-        this.shadowController = shadowController
     }
 
     void start(Maze maze, ShadowController shadowController) {
