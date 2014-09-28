@@ -62,4 +62,14 @@ class WallSpec extends RoboSpecification {
         then:
         neighbours.containsAll([nUp, nDown, nRight, nLeft])
     }
+
+    def "should return wall beetwen points"() {
+        given:
+        Point p1 = new Point(0, 0)
+        Point p2 = new Point(0, 1)
+        Wall w = new Wall(new Point(0, 1), new Point(1, 1,))
+
+        expect:
+        w == Point.getCommonWall(p1, p2)
+    }
 }
