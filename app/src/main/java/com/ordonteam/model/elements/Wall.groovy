@@ -7,6 +7,10 @@ import groovy.transform.CompileStatic
 @Canonical
 class Wall {
 
+    static Wall w(Point a, Point b) {
+        return new Wall(a, b)
+    }
+
     final Point wStart
 
     final Point wEnd
