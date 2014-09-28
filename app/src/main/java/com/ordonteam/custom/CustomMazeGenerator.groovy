@@ -16,10 +16,16 @@ class CustomMazeGenerator extends MazeGenerator {
     final int height
     private Random rand = new Random()
 
-    CustomMazeGenerator(int width, int height) {
+    public CustomMazeGenerator(int width, int height) {
         this.width = width
         this.height = height
         maze = new Maze(width, height)
+    }
+
+    public CustomMazeGenerator(int width, int height, int a) {
+        this.width = width;
+        this.height = height;
+        maze = new Maze(width, height);
     }
 
     @Override
