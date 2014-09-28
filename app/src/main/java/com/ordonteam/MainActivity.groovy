@@ -3,10 +3,9 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.LinearLayout
+import com.ordonteam.commons.CenteredLayout
 import com.ordonteam.custom.CustomActivity
 import com.ordonteam.levels.LevelsActivity
-import com.ordonteam.commons.CenteredLayout
 import groovy.transform.CompileStatic
 
 @CompileStatic
