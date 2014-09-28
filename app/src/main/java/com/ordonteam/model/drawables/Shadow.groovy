@@ -25,18 +25,49 @@ class Shadow implements Drawable {
 
     void show(Point point) {
         fields.put(point, true)
+        fields.put(point.up, true)
+        fields.put(point.down, true)
+        fields.put(point.left, true)
+        fields.put(point.right, true)
+        fields.put(point.up.left, true)
+        fields.put(point.up.right, true)
+        fields.put(point.down.left, true)
+        fields.put(point.down.right, true)
     }
+
+    void show(Point point, int range){
+        show(point)
+        if(range == 2){
+            showOneMore(point)
+        } else if(range == 3){
+            showTwoMore(point)
+        } else if(range == 4){
+            showThreeMore(point)
+        } else if(range ==5 ){
+            showFourMore(point)
+        }
+    }
+
 
     void draw(Canvas canvas) {
         Paint paint = new Paint()
         paint.setColor(Color.GRAY)
-        int fieldWidth = canvas.getWidth() / width
-        int fieldHeight = canvas.getHeight() / height
+        int fieldSize = Math.min(canvas.getWidth() / width, canvas.getHeight() / height)
         fields.each { point, value ->
-            if (value == false) {
-                canvas.drawRect(point.getX(), point.getY(), point.getX() + fieldWidth, point.getY() + fieldHeight, paint)
+            if (!value) {
+                canvas.drawRect(point.getX()*fieldSize, point.getY()*fieldSize, (point.getX()*fieldSize) + fieldSize, point.getY()*fieldSize + fieldSize, paint)
             }
         }
-        canvas.drawText("This is Shadow", 150, 170, new Paint())
+    }
+
+    void showOneMore(Point point) {
+        fields.put(point.up, true)
+        fields.put(point.down, true)
+        fields.put(point.left, true)
+        fields.put(point.right, true)
+        fields.put(point.up.left, true)
+        fields.put(point.up.right, true)
+        fields.put(point.down.left, true)
+        fields.put(point.down.right, true)
     }
 }
