@@ -35,7 +35,6 @@ class Shadow implements Drawable {
         }
     }
 
-
     void draw(Canvas canvas) {
         Paint paint = new Paint()
         paint.setColor(Color.GRAY)
