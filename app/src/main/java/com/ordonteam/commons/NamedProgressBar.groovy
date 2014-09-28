@@ -5,14 +5,11 @@ import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
 
-/**
- * Created by Kala on 2014-09-28.
- */
+
 public class NamedProgressBar extends LinearLayout {
     public TextView header
     public SeekBar seekBar
     public int value
-    public int barSize = 400
     private String name
 
     public NamedProgressBar(Context context, String name, int maxValue) {
@@ -34,7 +31,6 @@ public class NamedProgressBar extends LinearLayout {
     public createSeekBar(int maxValue) {
         seekBar = new SeekBar(context)
         seekBar.setMax(maxValue)
-        seekBar.setMinimumWidth(barSize)
 
         seekBar.setOnSeekBarChangeListener([
                 onStopTrackingTouch : {},
@@ -45,5 +41,4 @@ public class NamedProgressBar extends LinearLayout {
                 }
         ]as SeekBar.OnSeekBarChangeListener)
     }
-
 }
