@@ -1,40 +1,39 @@
 package com.ordonteam.maze.view
-
 import android.os.SystemClock
+import android.view.View
 import android.widget.Button
 import com.ordonteam.maze.MazeActivity
 import groovy.transform.CompileStatic
 
+import static com.ordonteam.commons.Util.startThread
 import static java.lang.String.format
 
 @CompileStatic
-class MazeTimeView extends Button implements Runnable {
+class MazeTimeView extends Button implements Runnable, View.OnClickListener {
 
-    private long timeInMilliseconds;
-    private long startTime;
+    private long timeInMilliseconds = 0;
+    private long startTime = 0;
     private Thread thread;
     private volatile boolean flag;
 
     MazeTimeView(MazeActivity mazeActivity) {
         super(mazeActivity);
-        timeInMilliseconds = 0;
-        startTime = 0;
-        flag = false;
-        thread = null;
         setText('Start!');
-        setOnClickListener {
-            if (!flag) {
-                start();
-            } else {
-                stop();
-            }
-        };
+        setOnClickListener(this);
+    }
+
+    @Override
+    void onClick(View view) {
+        if (!flag) {
+            start();
+        } else {
+            stop();
+        }
     }
 
     void start() {
-        startTime = SystemClock.uptimeMillis();
         flag = true;
-        (thread = new Thread(this)).start();
+        thread = startThread(this);
     }
 
     void stop() {
@@ -42,16 +41,15 @@ class MazeTimeView extends Button implements Runnable {
     }
 
     public void run() {
+        startTime = SystemClock.uptimeMillis();
         while (flag) {
             timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
             int secs = (int) (timeInMilliseconds / 1000);
             int mins = (int) (secs / 60);
-            secs = secs % 60;
-            int milliseconds = (int) (timeInMilliseconds % 1000);
+            String secsString = format("%02d",secs % 60);
+            String milliseconds = format("%03d",(int) (timeInMilliseconds % 1000));
             post {
-                this.setText("" + mins + ":"
-                        + format("%02d", secs) + ":"
-                        + format("%03d", milliseconds));
+                setText("$mins:$secsString:$milliseconds")
             }
             thread.sleep(100);
         }
