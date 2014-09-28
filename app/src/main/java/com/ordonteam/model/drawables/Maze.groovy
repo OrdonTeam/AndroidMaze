@@ -37,20 +37,8 @@ class Maze implements Drawable {
         walls.add(new Wall(a, b))
     }
 
-    public void removeWall(Wall wall) {
-        walls.remove(wall)
-    }
-
-    public void removeWall(Point a, Point b) {
-        walls.remove(new Wall(a, b))
-    }
-
     boolean isWallBetween(Point firstPoint, Point secondPoint) {
         return walls.contains(Point.getCommonWall(firstPoint, secondPoint))
-    }
-
-    boolean isFieldAfterWallUndiscovered(Wall wall) {
-        false
     }
 
     boolean pointHasAllWalls(Point point) {
@@ -59,5 +47,9 @@ class Maze implements Drawable {
 
     void removeWallBetweenPoints(Point p1, Point p2) {
         walls.remove(Point.getCommonWall(p1, p2))
+    }
+
+    Point getFinish() {
+        return Point.p(width - 1, height - 1)
     }
 }

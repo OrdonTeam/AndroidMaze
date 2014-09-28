@@ -8,17 +8,19 @@ import com.ordonteam.model.elements.Point
 import groovy.transform.Canonical
 import groovy.transform.CompileStatic
 
+import java.util.concurrent.ConcurrentLinkedQueue
+
 @Canonical
 @CompileStatic
 class Bot implements Drawable {
 
-    private Stack<Point> path = new Stack<>()
+    private Stack<Point> path = new ConcurrentLinkedQueue<>() as Stack
     int width
     int height
+    private Paint paint = new Paint()
 
     @Override
     void draw(Canvas canvas) {
-        Paint paint = new Paint()
         paint.setColor(Color.BLUE)
 
         double fieldWidth = Math.min((double) canvas.width / width, (double) canvas.height / height)
@@ -36,7 +38,7 @@ class Bot implements Drawable {
     }
 
     void moveTo(Point point) {
-        path.push(point)
+        path.add(point)
     }
 
     void goBack() {
