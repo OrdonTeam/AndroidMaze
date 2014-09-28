@@ -46,7 +46,7 @@ class Maze implements Drawable {
     }
 
     boolean isWallBetween(Point firstPoint, Point secondPoint) {
-        return false
+        return walls.contains(Point.getCommonWall(firstPoint, secondPoint))
     }
 
     boolean isFieldAfterWallUndiscovered(Wall wall) {
