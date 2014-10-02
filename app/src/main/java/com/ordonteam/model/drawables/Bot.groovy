@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentLinkedQueue
 @CompileStatic
 class Bot implements Drawable {
 
-    private Stack<Point> path = new ConcurrentLinkedQueue<>() as Stack
+    private Stack<Point> path = new ConcurrentLinkedQueue<>()
     int width
     int height
     private Paint paint = new Paint()

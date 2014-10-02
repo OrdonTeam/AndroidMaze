@@ -25,6 +25,11 @@ class BotController extends DrawableController implements Runnable {
     }
 
     void start(Maze maze, ShadowController shadowController) {
+        init(shadowController, maze)
+        startThread(this)
+    }
+
+    private void init(ShadowController shadowController, Maze maze) {
         this.shadowController = shadowController
         this.maze = maze
         for (int x = 0; x < maze.width; x++) {
@@ -32,12 +37,12 @@ class BotController extends DrawableController implements Runnable {
                 visitedFields.put(p(x, y), false)
             }
         }
-        startThread(this)
     }
 
     @Override
     void run() {
         bot.moveTo(new Point(0, 0))
+        visitedFields.put(p(0, 0), true)
         while (bot.current != maze.getFinish()) {
             step()
             invalidate()
@@ -46,7 +51,7 @@ class BotController extends DrawableController implements Runnable {
     }
 
     void step() {
-
+//        Log.d("kasper", bot.getCurrent().toString())
         Set<Point> neighbours = bot.current.getNeighbours()
         Set<Point> possibleMoves = neighbours.findAll {
             !maze.walls.contains(Point.getCommonWall(it, bot.current)) && !visitedFields.get(it)
@@ -61,6 +66,8 @@ class BotController extends DrawableController implements Runnable {
         }
 
         shadowController.show(bot.current)
+//        Log.d("kasper", bot.getCurrent().toString())
+
     }
 
 }
