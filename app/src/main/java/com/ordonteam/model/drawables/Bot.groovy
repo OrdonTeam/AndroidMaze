@@ -15,9 +15,15 @@ import java.util.concurrent.ConcurrentLinkedQueue
 class Bot implements Drawable {
 
     private Stack<Point> path = new ConcurrentLinkedQueue<>() as Stack
+    private Paint paint = new Paint()
     int width
     int height
-    private Paint paint = new Paint()
+
+    Bot(int width, int height) {
+        this.width = width
+        this.height = height
+        path.add(new Point(0, 0))
+    }
 
     @Override
     void draw(Canvas canvas) {

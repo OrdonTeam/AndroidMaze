@@ -52,7 +52,11 @@ class Maze implements Drawable {
         walls.remove(Point.getCommonWall(p1, p2))
     }
 
-    Point getFinish() {
-        return Point.p(width - 1, height - 1)
+    boolean isFinish(Point point) {
+        return Point.p(width - 1, height - 1) == point
+    }
+
+    boolean canMove(Point from, Point to) {
+        return !walls.contains(Point.getCommonWall(from, to))
     }
 }

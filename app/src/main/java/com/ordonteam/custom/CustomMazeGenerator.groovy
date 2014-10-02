@@ -42,10 +42,9 @@ class CustomMazeGenerator extends MazeGenerator {
         Point currentPoint = rollStartPoint()
 
         while (visitedCounter < fieldsCount - 1) {
-            Set<Point> neighbours = currentPoint.getNeighbours()
-            Set<Point> unvisitedNeighbours = neighbours.findAll {
+            Collection<Point> unvisitedNeighbours = currentPoint.neighbours.findAll {
                 maze.pointHasAllWalls(it)
-            }.toSet()
+            }
 
             if (unvisitedNeighbours.size() > 0) {
                 visitedCounter++

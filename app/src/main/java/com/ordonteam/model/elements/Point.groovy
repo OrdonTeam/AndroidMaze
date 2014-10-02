@@ -17,11 +17,11 @@ class Point {
     final int y
 
     static Wall getCommonWall(Point p1, Point p2) {
-        return p1.getPossibleWalls().intersect(p2.getPossibleWalls()).toList()?.get(0)
+        return p1.getPossibleWalls().intersect(p2.getPossibleWalls()).first()
     }
 
-    Set<Point> getNeighbours() {
-        return [left, right, up, down].toSet()
+    Collection<Point> getNeighbours() {
+        return [left, right, up, down]
     }
 
     Point getLeft() {

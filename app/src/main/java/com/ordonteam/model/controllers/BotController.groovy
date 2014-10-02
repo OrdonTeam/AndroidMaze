@@ -7,7 +7,7 @@ import com.ordonteam.model.elements.Point
 import groovy.transform.CompileStatic
 
 import static com.ordonteam.commons.Util.startThread
-import static com.ordonteam.model.elements.Point.p
+import static com.ordonteam.commons.UtilGroovy.getRandom
 
 @CompileStatic
 class BotController extends DrawableController implements Runnable {
@@ -27,40 +27,30 @@ class BotController extends DrawableController implements Runnable {
     void start(Maze maze, ShadowController shadowController) {
         this.shadowController = shadowController
         this.maze = maze
-        for (int x = 0; x < maze.width; x++) {
-            for (int y = 0; y < maze.height; y++) {
-                visitedFields.put(p(x, y), false)
-            }
-        }
         startThread(this)
     }
 
     @Override
     void run() {
-        bot.moveTo(new Point(0, 0))
-        while (bot.current != maze.getFinish()) {
+        while (!maze.isFinish(bot.current)) {
             step()
+            shadowController.show(bot.current)
             invalidate()
             sleep(200)
         }
     }
 
     void step() {
-
-        Set<Point> neighbours = bot.current.getNeighbours()
-        Set<Point> possibleMoves = neighbours.findAll {
-            !maze.walls.contains(Point.getCommonWall(it, bot.current)) && !visitedFields.get(it)
-        }.toSet()
-
-        if (possibleMoves.size() > 0) {
-            Point chosenPath = UtilGroovy.getRandom(possibleMoves, rand)
-            bot.moveTo(chosenPath)
+        Collection<Point> possibleMoves = bot.current.neighbours.findAll {
+            maze.canMove(bot.current,it) && !visitedFields.get(it)
+        }
+        if (!possibleMoves.isEmpty()) {
+            Point chosenPath = getRandom(possibleMoves, rand)
             visitedFields.put(chosenPath, true)
+            bot.moveTo(chosenPath)
         } else {
             bot.goBack()
         }
-
-        shadowController.show(bot.current)
     }
 
 }
