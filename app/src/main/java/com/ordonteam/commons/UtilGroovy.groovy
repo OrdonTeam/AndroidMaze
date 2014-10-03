@@ -9,6 +9,6 @@ class UtilGroovy {
 //        return set.toList().get(random.nextInt(set.size()))
 //    }
     public static <T> T getRandom(Collection<T> set, Random random) {
-        return set.getAt(random.nextInt(set.size()))
+        return set.toList().get(random.nextInt(set.size()))
     }
 }

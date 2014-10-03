@@ -60,10 +60,6 @@ class CustomMazeGenerator extends MazeGenerator {
         return maze
     }
 
-    private Point getRandom(Set<Point> unvisitedNeighbours) {
-        return unvisitedNeighbours.toList().get(rand.nextInt(unvisitedNeighbours.size()))
-    }
-
     private Point rollStartPoint() {
         new Point(rand.nextInt(width), rand.nextInt(height));
     }
