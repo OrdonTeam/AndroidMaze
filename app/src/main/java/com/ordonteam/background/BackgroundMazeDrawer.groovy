@@ -7,22 +7,19 @@ import groovy.transform.CompileStatic
 import static com.ordonteam.commons.Util.startThread
 
 @CompileStatic
-public class CMGCanvas implements InvalidateCallback {
+public class BackgroundMazeDrawer implements InvalidateCallback {
     DrawableView view;
     private final CustomMazeGenerator customMazeGenerator;
 
-    public CMGCanvas() {
+    public BackgroundMazeDrawer() {
         customMazeGenerator = new CustomMazeGenerator(new RepaintableMaze(10, 20, this));
     }
 
     public DrawableView start(Activity activity) {
         view = new DrawableView(activity, customMazeGenerator.maze);
-        startThread(new Runnable() {
-            @Override
-            public void run() {
-                customMazeGenerator.generate();
-            }
-        });
+        startThread{
+                customMazeGenerator.generate()
+        }
         return view;
     }
 
