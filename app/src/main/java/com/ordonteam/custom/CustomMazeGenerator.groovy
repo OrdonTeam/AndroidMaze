@@ -22,10 +22,10 @@ class CustomMazeGenerator extends MazeGenerator {
         maze = new Maze(width, height)
     }
 
-    public CustomMazeGenerator(int width, int height, int a) {
-        this.width = width;
-        this.height = height;
-        maze = new Maze(width, height);
+    public CustomMazeGenerator(Maze maze) {
+        this.width = maze.width
+        this.height = maze.height
+        this.maze = maze
     }
 
     @Override
@@ -61,12 +61,8 @@ class CustomMazeGenerator extends MazeGenerator {
         return maze
     }
 
-    private Point getRandom(Set<Point> unvisitedNeighbours) {
-        return unvisitedNeighbours.toList().get(rand.nextInt(unvisitedNeighbours.size()))
-    }
-
     private Point rollStartPoint() {
-        new Point(rand.nextInt(width), rand.nextInt(height));
+        return new Point(rand.nextInt(width), rand.nextInt(height));
     }
 
     private void createVerticalLines() {

@@ -14,7 +14,7 @@ class Maze implements Drawable {
     final int width;
     final int height;
 
-    Set<Wall> walls = new Collections().newSetFromMap(new ConcurrentHashMap<Wall, Boolean>())
+    final Set<Wall> walls = new Collections().newSetFromMap(new ConcurrentHashMap<Wall, Boolean>())
 
     public Maze(int width, int height){
         this.width = width
