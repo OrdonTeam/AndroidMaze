@@ -4,6 +4,7 @@ import com.ordonteam.commons.UtilGroovy
 import com.ordonteam.model.MazeGenerator
 import com.ordonteam.model.drawables.Maze
 import com.ordonteam.model.elements.Point
+import com.ordonteam.model.elements.Wall
 import groovy.transform.Canonical
 import groovy.transform.CompileStatic
 
@@ -30,10 +31,7 @@ class CustomMazeGenerator extends MazeGenerator {
 
     @Override
     Maze generate() {
-
-        createHorizontalLines()
-
-        createVerticalLines()
+        fillWholeMaze()
 
         final int fieldsCount = width * height
         int visitedCounter = 0
@@ -41,7 +39,7 @@ class CustomMazeGenerator extends MazeGenerator {
 
         Point currentPoint = rollStartPoint()
 
-        while (visitedCounter < fieldsCount - 1) {
+        while (visitedCounter < fieldsCount - 1 && !Thread.currentThread().isInterrupted()) {
             Set<Point> neighbours = currentPoint.getNeighbours()
             Set<Point> unvisitedNeighbours = neighbours.findAll {
                 maze.pointHasAllWalls(it)
@@ -61,23 +59,32 @@ class CustomMazeGenerator extends MazeGenerator {
         return maze
     }
 
+    protected void fillWholeMaze() {
+        createHorizontalLines().each {
+            maze.addWall(it)
+        }
+        createVerticalLines().each {
+            maze.addWall(it)
+        }
+    }
+
     private Point rollStartPoint() {
         return new Point(rand.nextInt(width), rand.nextInt(height));
     }
 
-    private void createVerticalLines() {
-        for (int x = 0; x < width + 1; x++) {
-            for (int y = 0; y < height; y++) {
-                maze.addWall(new Point(x, y), new Point(x, y + 1))
+    protected Collection<Wall> createVerticalLines() {
+        return (0..width).collect { x ->
+            (0..height - 1).collect { y ->
+                new Wall(new Point(x, y), new Point(x, y + 1))
             }
-        }
+        }.flatten()
     }
 
-    private void createHorizontalLines() {
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height + 1; y++) {
-                maze.addWall(new Point(x, y), new Point(x + 1, y))
+    protected Collection<Wall> createHorizontalLines() {
+        return (0..width - 1).collect { x ->
+            (0..height).collect { y ->
+                new Wall(new Point(x, y), new Point(x + 1, y))
             }
-        }
+        }.flatten()
     }
 }

@@ -13,36 +13,29 @@ import groovy.transform.CompileStatic
 
 @CompileStatic
 class MainActivity extends Activity {
+    private BackgroundMazeDrawer drawer
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState)
         RelativeLayout layout = new RelativeLayout(this);
 
-        layout.addView(new BackgroundMazeDrawer().start(this))
+        drawer = new BackgroundMazeDrawer()
+        layout.addView(drawer.onCreate(this))
 
         CenteredLayout centeredLayout = new CenteredLayout(this)
-        centeredLayout.addView(levelsButton())
-        centeredLayout.addView(customButton())
+        centeredLayout.addView(startButton('levelsButton', LevelsActivity.class))
+        centeredLayout.addView(startButton('customButton', CustomActivity.class))
         layout.addView(centeredLayout)
 
-        setContentView(layout);
+        setContentView(layout)
     }
 
-    private Button levelsButton() {
+    private Button startButton(String text, Class<?> activityToStart) {
         Button button = new Button(this)
-        button.setText('levelsButton')
+        button.setText(text)
         button.setOnClickListener({
-            startActivity(LevelsActivity.class)
-        })
-        return button
-    }
-
-    private Button customButton() {
-        Button button = new Button(this)
-        button.setText('customButton')
-        button.setOnClickListener({
-            startActivity(CustomActivity.class)
+            startActivity(activityToStart)
         })
         return button
     }
@@ -50,5 +43,17 @@ class MainActivity extends Activity {
     private void startActivity(Class<?> activity) {
         Intent intent = new Intent(this, activity)
         startActivity(intent)
+    }
+
+    @Override
+    void onResume(){
+        super.onResume()
+        drawer.onResume()
+    }
+
+    @Override
+    void onPause(){
+        super.onPause()
+        drawer.onPause()
     }
 }

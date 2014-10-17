@@ -37,7 +37,11 @@ class Maze implements Drawable {
     }
 
     public void addWall(Point a, Point b) {
-        walls.add(new Wall(a, b))
+        addWall(new Wall(a, b))
+    }
+
+    public void addWall(Wall wall) {
+        walls.add(wall)
     }
 
     boolean isWallBetween(Point firstPoint, Point secondPoint) {
