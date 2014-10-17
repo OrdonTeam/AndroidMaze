@@ -9,14 +9,25 @@ import static com.ordonteam.commons.Util.startThread
 
 @CompileStatic
 abstract class MazeGenerator implements Serializable {
+
+    Thread thread
+
     void generate(Handler handler, Callback<Maze> mazeCallback) {
-        startThread({
+        thread = startThread({
             Maze maze = generate()
-            handler.post({
-                mazeCallback.callWith(maze)
-            })
+            if(!Thread.currentThread().isInterrupted()){
+                handler.post({
+                    mazeCallback.callWith(maze)
+                })
+            }
         })
     }
 
     abstract Maze generate();
+
+    abstract int progress();
+
+    void interrupt() {
+        thread?.interrupt()
+    }
 }

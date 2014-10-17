@@ -12,15 +12,16 @@ import static com.ordonteam.commons.Util.getFromIntent
 @CompileStatic
 class MazeActivity extends Activity implements Callback<Maze> {
     private MazeLayout layout
+    private WaitingLayout waitingLayout
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState)
         MazeGenerator mazeGenerator = getFromIntent(this, MazeGenerator.class)
 
-        WaitingLayout waitingLayout = new WaitingLayout(this, mazeGenerator)
-        setContentView(waitingLayout)
-        waitingLayout.startGenerating()
+        waitingLayout = new WaitingLayout(this, mazeGenerator)
+        setContentView(this.waitingLayout)
+        this.waitingLayout.startGenerating()
     }
 
     @Override
@@ -34,6 +35,7 @@ class MazeActivity extends Activity implements Callback<Maze> {
     @Override
     protected void onPause() {
         super.onPause()
-
+        waitingLayout?.interrupt()
+        finish()
     }
 }

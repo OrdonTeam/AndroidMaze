@@ -16,16 +16,20 @@ class CustomMazeGenerator extends MazeGenerator {
     final int width
     final int height
     private Random rand = new Random()
+    final int fieldsCount
+    private int visitedCounter = 0
 
     public CustomMazeGenerator(int width, int height) {
         this.width = width
         this.height = height
+        fieldsCount = width * height
         maze = new Maze(width, height)
     }
 
     public CustomMazeGenerator(Maze maze) {
         this.width = maze.width
         this.height = maze.height
+        fieldsCount = width * height
         this.maze = maze
     }
 
@@ -33,20 +37,18 @@ class CustomMazeGenerator extends MazeGenerator {
     Maze generate() {
         fillWholeMaze()
 
-        final int fieldsCount = width * height
-        int visitedCounter = 0
         Stack<Point> stack = new Stack<>()
 
         Point currentPoint = rollStartPoint()
 
-        while (visitedCounter < fieldsCount - 1 && !Thread.currentThread().isInterrupted()) {
+        while (this.visitedCounter < this.fieldsCount - 1 && !Thread.currentThread().isInterrupted()) {
             Set<Point> neighbours = currentPoint.getNeighbours()
             Set<Point> unvisitedNeighbours = neighbours.findAll {
                 maze.pointHasAllWalls(it)
             }.toSet()
 
             if (unvisitedNeighbours.size() > 0) {
-                visitedCounter++
+                this.visitedCounter++
                 Point randomUnvisitedNeighbour = UtilGroovy.getRandom(unvisitedNeighbours, rand)
                 stack.push(currentPoint)
                 maze.removeWallBetweenPoints(currentPoint, randomUnvisitedNeighbour)
@@ -57,6 +59,11 @@ class CustomMazeGenerator extends MazeGenerator {
         }
 
         return maze
+    }
+
+    @Override
+    int progress() {
+        return (int)(visitedCounter*100/fieldsCount)
     }
 
     protected void fillWholeMaze() {
