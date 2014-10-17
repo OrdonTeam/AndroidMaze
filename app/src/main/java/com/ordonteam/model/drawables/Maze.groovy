@@ -16,24 +16,24 @@ class Maze implements Drawable {
 
     final Set<Wall> walls = new Collections().newSetFromMap(new ConcurrentHashMap<Wall, Boolean>())
 
-    public Maze(int width, int height){
+    public Maze(int width, int height) {
         this.width = width
         this.height = height
     }
 
-    void draw(Canvas canvas) {
+    @Override
+    public void draw(Canvas canvas, int width, int height) {
         Paint paint = new Paint()
         paint.setColor(Color.GREEN)
         paint.setStrokeWidth(2)
 
-        float xScale = (float) canvas.width / (width)
-        float yScale = (float) canvas.height / (height)
+        float xScale = (float) width / this.width
+        float yScale = (float) height / this.height
         float scale = Math.min(xScale, yScale)
         paint.setColor(Color.RED)
         walls.each { wall ->
             wall.draw(canvas, scale, paint)
         }
-
     }
 
     public void addWall(Point a, Point b) {

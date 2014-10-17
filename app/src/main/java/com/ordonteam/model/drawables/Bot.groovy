@@ -20,10 +20,10 @@ class Bot implements Drawable {
     private Paint paint = new Paint()
 
     @Override
-    void draw(Canvas canvas) {
+    public void draw(Canvas canvas, int width, int height) {
         paint.setColor(Color.BLUE)
 
-        double fieldWidth = Math.min((double) canvas.width / width, (double) canvas.height / height)
+        double fieldWidth = Math.min((double) width / this.width, (double) height / this.height)
         ConcurrentLinkedQueue<Point> clq = path as ConcurrentLinkedQueue;
         clq.each { point ->
             canvas.drawRect((float) point.x * fieldWidth,

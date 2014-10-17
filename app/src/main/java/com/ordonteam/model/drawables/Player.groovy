@@ -28,10 +28,11 @@ class Player implements Drawable {
         point = point.right
     }
 
-    void draw(Canvas canvas) {
+    @Override
+    public void draw(Canvas canvas, int width, int height) {
         Paint paint = new Paint()
         paint.setColor(Color.GREEN)
-        int fieldWidth = Math.min( (int)(canvas.width / width), (int)(canvas.height / height))
+        int fieldWidth = Math.min( (int)(width / this.width), (int)(height / this.height))
         canvas.drawCircle((float)point.x*fieldWidth+fieldWidth/2,
                 (float)point.y*fieldWidth+fieldWidth/2,
                 (float)fieldWidth/2,

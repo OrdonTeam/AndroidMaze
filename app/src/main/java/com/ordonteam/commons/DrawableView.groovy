@@ -1,5 +1,4 @@
 package com.ordonteam.commons
-
 import android.content.Context
 import android.graphics.Canvas
 import android.view.View
@@ -16,6 +15,6 @@ class DrawableView extends View {
 
     @Override
     void onDraw(Canvas canvas) {
-        drawable.draw(canvas)
+        drawable.draw(canvas, width, height)
     }
 }

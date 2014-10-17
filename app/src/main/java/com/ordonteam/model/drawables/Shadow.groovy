@@ -43,10 +43,11 @@ class Shadow implements Drawable {
         }
     }
 
-    void draw(Canvas canvas) {
+    @Override
+    public void draw(Canvas canvas, int width, int height) {
         Paint paint = new Paint()
         paint.setColor(Color.GRAY)
-        int fieldSize = Math.min(canvas.getWidth() / width, canvas.getHeight() / height)
+        int fieldSize = Math.min(width / this.width, height / this.height)
         fields.each { point, value ->
             if (!value) {
                 canvas.drawRect(point.getX()*fieldSize, point.getY()*fieldSize, (point.getX()*fieldSize) + fieldSize, point.getY()*fieldSize + fieldSize, paint)
