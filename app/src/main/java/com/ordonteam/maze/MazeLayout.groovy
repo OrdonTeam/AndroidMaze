@@ -17,27 +17,34 @@ import static com.ordonteam.maze.view.AccumulatedLayout.anAccumulatedLayout
 @CompileStatic
 class MazeLayout extends LinearLayout {
     private MazeActivity mazeActivity
+    private Maze maze
+    private BotController botController
+    private PlayerController playerController
+    private ShadowController shadowController
+    private AccumulatedLayout layout
 
     MazeLayout(MazeActivity mazeActivity, Maze maze) {
         super(mazeActivity)
+        this.maze = maze
         this.mazeActivity = mazeActivity
         setOrientation(VERTICAL)
         addView(new MazeTimeView(mazeActivity))
 
         //This element should be passed from outside
-        BotController botController = new BotController(new Bot(maze.width,maze.height))
-        PlayerController playerController = new PlayerController(new Player(maze.width,maze.height))
-        ShadowController shadowController = new ShadowController(new Shadow(maze.width, maze.height))
+        botController = new BotController(new Bot(maze.width, maze.height))
+        playerController = new PlayerController(new Player(maze.width, maze.height))
+        shadowController = new ShadowController(new Shadow(maze.width, maze.height))
 //        ShadowController shadowController = new ShadowController(Shadow.noShadow())
         //end
-        AccumulatedLayout layout = anAccumulatedLayout(mazeActivity)
-                .with(botController)
-                .with(maze).with(playerController)
-                .with(shadowController).build()
-        addView(layout)
+        layout = anAccumulatedLayout(mazeActivity)
+                .with(this.botController)
+                .with(maze).with(this.playerController)
+                .with(this.shadowController).build()
+        addView(this.layout)
+    }
 
+    void start(){
         botController.start(maze, shadowController)
         playerController.start(maze, shadowController, layout)
-
     }
 }

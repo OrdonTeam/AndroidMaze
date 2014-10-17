@@ -15,20 +15,20 @@ class MazeTimeView extends Button implements Runnable, View.OnClickListener {
     private long startTime = 0;
     private Thread thread;
     private volatile boolean flag;
+    private MazeActivity mazeActivity
 
     MazeTimeView(MazeActivity mazeActivity) {
         super(mazeActivity);
+        this.mazeActivity = mazeActivity
         setText('Start!');
         setOnClickListener(this);
     }
 
     @Override
     void onClick(View view) {
-        if (!flag) {
-            start();
-        } else {
-            stop();
-        }
+        mazeActivity.start()
+        start()
+        setEnabled(false)
     }
 
     void start() {

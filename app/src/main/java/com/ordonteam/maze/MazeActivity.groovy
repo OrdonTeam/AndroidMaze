@@ -32,6 +32,10 @@ class MazeActivity extends Activity implements Callback<Maze> {
         setContentView(layout)
     }
 
+    void start(){
+        layout.start()
+    }
+
     @Override
     protected void onPause() {
         super.onPause()
