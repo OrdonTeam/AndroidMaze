@@ -1,9 +1,6 @@
 package com.ordonteam.background
-
 import android.app.Activity
 import com.ordonteam.commons.DrawableView
-import com.ordonteam.custom.CustomMazeGenerator
-import com.ordonteam.model.elements.Wall
 import groovy.transform.CompileStatic
 
 import static com.ordonteam.commons.Util.startThread
@@ -21,35 +18,45 @@ public class BackgroundMazeDrawer implements InvalidateCallback, Runnable {
     }
 
     public void onResume() {
-        generatingThread = startThread (this)
+        generatingThread = startThread(this)
     }
 
-    @Override
-    void run() {
+    private void runInternal() {
         isStopped = false
         while (!isStopped) {
             maze.clear()
-            new CustomMazeGenerator(maze) {
-                @Override
-                protected void fillWholeMaze() {
-                    List<Wall> walls = createHorizontalLines() as List
-                    walls.addAll(createVerticalLines())
-                    Collections.shuffle(walls)
-                    walls.each {
-                        maze.addWall(it)
-                    }
-                }
-            }.generate()
+            new BackgroundMazeGenerator(maze).generate()
         }
     }
 
     @Override
     public void invalidate() {
+        sleep()
         view.postInvalidate();
     }
 
     public void onPause() {
         isStopped = true
         generatingThread.interrupt()
+    }
+
+    @Override
+    void run() {
+        try {
+            runInternal()
+        } catch (BreakException e) {
+            //
+        }
+    }
+
+    private void sleep() {
+        try {
+            Thread.sleep(1)
+        } catch (e) {
+            throw new BreakException()
+        }
+        if (isStopped) {
+            throw new BreakException()
+        }
     }
 }
