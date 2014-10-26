@@ -1,9 +1,9 @@
 package com.ordonteam.model.drawables
 
-import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import com.ordonteam.commons.Drawable
+import com.ordonteam.commons.ScalableCanvas
 import com.ordonteam.model.elements.Point
 import groovy.transform.Canonical
 import groovy.transform.CompileStatic
@@ -20,16 +20,15 @@ class Bot implements Drawable {
     private Paint paint = new Paint()
 
     @Override
-    public void draw(Canvas canvas, int width, int height) {
+    public void draw(ScalableCanvas canvas) {
         paint.setColor(Color.BLUE)
 
-        double fieldWidth = Math.min((double) width / this.width, (double) height / this.height)
         ConcurrentLinkedQueue<Point> clq = path as ConcurrentLinkedQueue;
         clq.each { point ->
-            canvas.drawRect((float) point.x * fieldWidth,
-                    (float) point.y * fieldWidth,
-                    (float) point.x * fieldWidth + fieldWidth,
-                    (float) point.y * fieldWidth + fieldWidth,
+            canvas.drawRect((float) point.x,
+                    (float) point.y,
+                    (float) point.x + 1,
+                    (float) point.y + 1,
                     paint)
         }
     }

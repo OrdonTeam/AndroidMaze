@@ -1,16 +1,14 @@
 package com.ordonteam.model.drawables
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import com.ordonteam.commons.Drawable
+
+import com.ordonteam.commons.ScalableCanvas
+import com.ordonteam.commons.dimensions.Dimensionable
 import com.ordonteam.model.elements.Point
-import com.ordonteam.model.elements.Wall
 import groovy.transform.CompileStatic
 
 import java.util.concurrent.ConcurrentHashMap
 
 @CompileStatic
-class Maze implements Drawable {
+class Maze implements Dimensionable {
     final int width;
     final int height;
 
@@ -22,17 +20,9 @@ class Maze implements Drawable {
     }
 
     @Override
-    public void draw(Canvas canvas, int width, int height) {
-        Paint paint = new Paint()
-        paint.setColor(Color.GREEN)
-        paint.setStrokeWidth(2)
-
-        float xScale = (float) width / this.width
-        float yScale = (float) height / this.height
-        float scale = Math.min(xScale, yScale)
-        paint.setColor(Color.RED)
+    public void draw(ScalableCanvas canvas) {
         walls.each { wall ->
-            wall.draw(canvas, scale, paint)
+            wall.draw(canvas)
         }
     }
 

@@ -2,9 +2,9 @@ package com.ordonteam.maze.view
 
 import android.content.Context
 import android.widget.RelativeLayout
-import com.ordonteam.commons.Drawable
 import com.ordonteam.commons.DrawableView
 import com.ordonteam.model.controllers.DrawableController
+import com.ordonteam.commons.dimensions.Dimensionable
 import groovy.transform.CompileStatic
 
 @CompileStatic
@@ -26,7 +26,7 @@ class AccumulatedLayout extends RelativeLayout {
             this.context = context
         }
 
-        AccumulatedLayoutBuilder with(Drawable drawable) {
+        AccumulatedLayoutBuilder with(Dimensionable drawable) {
             drawables.add(new DrawableView(context, drawable))
             return this
         }

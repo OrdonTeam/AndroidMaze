@@ -1,10 +1,7 @@
 package com.ordonteam.background
 
 import android.app.Activity
-import android.util.Log
 import com.ordonteam.commons.DrawableView
-import com.ordonteam.custom.CustomMazeGenerator
-import com.ordonteam.model.elements.Wall
 import groovy.transform.CompileStatic
 
 import static com.ordonteam.commons.Util.startThread

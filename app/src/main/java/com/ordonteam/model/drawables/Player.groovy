@@ -1,18 +1,14 @@
 package com.ordonteam.model.drawables
 
-import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import com.ordonteam.model.elements.Point
 import com.ordonteam.commons.Drawable
-import groovy.transform.Canonical
+import com.ordonteam.commons.ScalableCanvas
+import com.ordonteam.model.elements.Point
 import groovy.transform.CompileStatic
 
 @CompileStatic
-@Canonical
 class Player implements Drawable {
-    final int width
-    final int height
 
     Point point = new Point(0,0)
 
@@ -29,13 +25,12 @@ class Player implements Drawable {
     }
 
     @Override
-    public void draw(Canvas canvas, int width, int height) {
+    public void draw(ScalableCanvas canvas) {
         Paint paint = new Paint()
         paint.setColor(Color.GREEN)
-        int fieldWidth = Math.min( (int)(width / this.width), (int)(height / this.height))
-        canvas.drawCircle((float)point.x*fieldWidth+fieldWidth/2,
-                (float)point.y*fieldWidth+fieldWidth/2,
-                (float)fieldWidth/2,
+        canvas.drawCircle((float)point.x + 1/2,
+                (float)point.y + 1/2,
+                (float)1/2,
                 paint)
     }
 

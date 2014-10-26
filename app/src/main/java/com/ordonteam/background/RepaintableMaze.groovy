@@ -2,7 +2,7 @@ package com.ordonteam.background
 
 import com.ordonteam.model.drawables.Maze
 import com.ordonteam.model.elements.Point
-import com.ordonteam.model.elements.Wall
+import com.ordonteam.model.drawables.Wall
 import groovy.transform.CompileStatic
 
 @CompileStatic

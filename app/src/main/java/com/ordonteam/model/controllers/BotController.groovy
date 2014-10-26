@@ -1,6 +1,7 @@
 package com.ordonteam.model.controllers
 
 import com.ordonteam.commons.UtilGroovy
+import com.ordonteam.commons.dimensions.Dimension
 import com.ordonteam.model.drawables.Bot
 import com.ordonteam.model.drawables.Maze
 import com.ordonteam.model.elements.Point
@@ -19,17 +20,18 @@ class BotController extends DrawableController implements Runnable {
     private Map<Point, Boolean> visitedFields = new HashMap<>()
 
 
-    BotController(Bot bot) {
-        super(bot)
+    BotController(Maze maze,Bot bot) {
+        super(bot, new Dimension(maze.getWidth(),maze.getHeight()))
         this.bot = bot
+        this.maze = maze
     }
 
-    void start(Maze maze, ShadowController shadowController) {
-        init(shadowController, maze)
+    void start(ShadowController shadowController) {
+        init(shadowController)
         startThread(this)
     }
 
-    private void init(ShadowController shadowController, Maze maze) {
+    private void init(ShadowController shadowController) {
         this.shadowController = shadowController
         this.maze = maze
         for (int x = 0; x < maze.width; x++) {
@@ -51,7 +53,6 @@ class BotController extends DrawableController implements Runnable {
     }
 
     void step() {
-//        Log.d("kasper", bot.getCurrent().toString())
         Set<Point> neighbours = bot.current.getNeighbours()
         Set<Point> possibleMoves = neighbours.findAll {
             !maze.walls.contains(Point.getCommonWall(it, bot.current)) && !visitedFields.get(it)
@@ -66,7 +67,6 @@ class BotController extends DrawableController implements Runnable {
         }
 
         shadowController.show(bot.current)
-//        Log.d("kasper", bot.getCurrent().toString())
 
     }
 

@@ -1,5 +1,7 @@
 package com.ordonteam.model.controllers
 
+import com.ordonteam.commons.dimensions.Dimension
+import com.ordonteam.model.drawables.Maze
 import com.ordonteam.model.drawables.Shadow
 import com.ordonteam.model.elements.Point
 import groovy.transform.CompileStatic
@@ -8,9 +10,10 @@ import groovy.transform.CompileStatic
 class ShadowController extends DrawableController {
     public Shadow shadow
 
-    ShadowController(Shadow shadow) {
-        super(shadow)
+    ShadowController(Maze maze,Shadow shadow) {
+        super(shadow, new Dimension(maze.getWidth(),maze.getHeight()))
         this.shadow = shadow
+        shadow.init(maze.getWidth(),maze.getHeight());
     }
 
     public void show(Point point) {

@@ -31,9 +31,9 @@ class MazeLayout extends LinearLayout {
         addView(new MazeTimeView(mazeActivity))
 
         //This element should be passed from outside
-        botController = new BotController(new Bot(maze.width, maze.height))
-        playerController = new PlayerController(new Player(maze.width, maze.height))
-        shadowController = new ShadowController(new Shadow(maze.width, maze.height))
+        botController = new BotController(maze,new Bot())
+        playerController = new PlayerController(maze,new Player())
+        shadowController = new ShadowController(maze,new Shadow())
 //        ShadowController shadowController = new ShadowController(Shadow.noShadow())
         //end
         layout = anAccumulatedLayout(mazeActivity)
@@ -44,7 +44,7 @@ class MazeLayout extends LinearLayout {
     }
 
     void start(){
-        botController.start(maze, shadowController)
-        playerController.start(maze, shadowController, layout)
+        botController.start(shadowController)
+        playerController.start(shadowController, layout)
     }
 }

@@ -1,9 +1,10 @@
 package com.ordonteam.model.elements
 
+import com.ordonteam.model.drawables.Wall
 import groovy.transform.Canonical
 import groovy.transform.CompileStatic
 
-import static com.ordonteam.model.elements.Wall.w;
+import static com.ordonteam.model.drawables.Wall.w;
 
 @CompileStatic
 @Canonical

@@ -1,13 +1,16 @@
-package com.ordonteam.model.elements
+package com.ordonteam.model.drawables
 
-import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
+import com.ordonteam.commons.Drawable
+import com.ordonteam.commons.ScalableCanvas
+import com.ordonteam.model.elements.Point
 import groovy.transform.Canonical
 import groovy.transform.CompileStatic
 
 @CompileStatic
 @Canonical
-class Wall {
+class Wall implements Drawable {
 
     static Wall w(Point a, Point b) {
         return new Wall(a, b)
@@ -35,7 +38,13 @@ class Wall {
         return wStart.hashCode() + wEnd.hashCode()
     }
 
-    void draw(Canvas canvas, float scale, Paint paint) {
-        canvas.drawLine((float)wStart.x * scale, (float)wStart.y * scale, (float)wEnd.x * scale, (float)wEnd.y * scale, paint)
+    @Override
+    void draw(ScalableCanvas canvas) {
+        Paint paint = new Paint()
+        paint.setColor(Color.GREEN)
+        paint.setStrokeWidth(2)
+
+        paint.setColor(Color.RED)
+        canvas.drawLine((float)wStart.x, (float)wStart.y, (float)wEnd.x, (float)wEnd.y, paint)
     }
 }

@@ -1,6 +1,7 @@
 package com.ordonteam.model.controllers
 import android.view.MotionEvent
 import android.view.View
+import com.ordonteam.commons.dimensions.Dimension
 import com.ordonteam.model.drawables.Maze
 import com.ordonteam.model.drawables.Player
 import com.ordonteam.model.elements.Point
@@ -13,14 +14,14 @@ class PlayerController extends DrawableController implements View.OnTouchListene
     private Maze maze
     private ShadowController shadowController
 
-    PlayerController(Player player) {
-        super(player)
+    PlayerController(Maze maze, Player player) {
+        super(player,new Dimension(maze))
         this.player = player
+        this.maze = maze
     }
 
-    void start(Maze maze, ShadowController shadowController, View layout) {
+    void start(ShadowController shadowController, View layout) {
         this.shadowController = shadowController
-        this.maze = maze
         shadowController.show(player.point)
         layout.setOnTouchListener(this)
     }

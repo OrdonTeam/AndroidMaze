@@ -1,5 +1,6 @@
 package com.ordonteam.model.elements
 
+import com.ordonteam.model.drawables.Wall
 import pl.polidea.robospock.RoboSpecification
 
 class WallSpec extends RoboSpecification {
