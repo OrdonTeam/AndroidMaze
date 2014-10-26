@@ -10,7 +10,7 @@ public class RepaintableMaze extends Maze {
     private InvalidateCallback invalidateCallback
 
     public RepaintableMaze(int width, int height, InvalidateCallback invalidateCallback) {
-        super(width,height);
+        super(width, height);
         this.invalidateCallback = invalidateCallback
     }
 
@@ -22,8 +22,14 @@ public class RepaintableMaze extends Maze {
 
     @Override
     public void removeWallBetweenPoints(Point a, Point b) {
-        super.removeWallBetweenPoints(a,b)
+        super.removeWallBetweenPoints(a, b)
         invalidateCallback.invalidate()
+
+        try {
+            sleep(100)
+        } catch (InterruptedException ex) {
+            // ignore
+        }
     }
 
     void clear() {

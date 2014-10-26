@@ -1,6 +1,7 @@
 package com.ordonteam.background
 
 import android.app.Activity
+import android.util.Log
 import com.ordonteam.commons.DrawableView
 import com.ordonteam.custom.CustomMazeGenerator
 import com.ordonteam.model.elements.Wall
@@ -11,9 +12,9 @@ import static com.ordonteam.commons.Util.startThread
 @CompileStatic
 public class BackgroundMazeDrawer implements InvalidateCallback, Runnable {
     DrawableView view;
-    private RepaintableMaze maze = new RepaintableMaze(20, 40, this)
+    private final RepaintableMaze maze = new RepaintableMaze(20, 40, this)
     private volatile boolean isStopped = false
-    Thread generatingThread
+    BackgroundMazeGenerator generator
 
     public DrawableView onCreate(Activity activity) {
         view = new DrawableView(activity, maze);
@@ -21,7 +22,7 @@ public class BackgroundMazeDrawer implements InvalidateCallback, Runnable {
     }
 
     public void onResume() {
-        generatingThread = startThread (this)
+        startThread(this)
     }
 
     @Override
@@ -29,17 +30,8 @@ public class BackgroundMazeDrawer implements InvalidateCallback, Runnable {
         isStopped = false
         while (!isStopped) {
             maze.clear()
-            new CustomMazeGenerator(maze) {
-                @Override
-                protected void fillWholeMaze() {
-                    List<Wall> walls = createHorizontalLines() as List
-                    walls.addAll(createVerticalLines())
-                    Collections.shuffle(walls)
-                    walls.each {
-                        maze.addWall(it)
-                    }
-                }
-            }.generate()
+            generator = new BackgroundMazeGenerator(maze)
+            generator.generate()
         }
     }
 
@@ -50,6 +42,6 @@ public class BackgroundMazeDrawer implements InvalidateCallback, Runnable {
 
     public void onPause() {
         isStopped = true
-        generatingThread.interrupt()
+        generator?.interrupt()
     }
 }

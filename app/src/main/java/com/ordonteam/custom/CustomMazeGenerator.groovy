@@ -15,9 +15,10 @@ class CustomMazeGenerator extends MazeGenerator {
     protected Maze maze
     final int width
     final int height
-    private Random rand = new Random()
+    private final Random rand = new Random()
     final int fieldsCount
     private int visitedCounter = 0
+    private volatile boolean isStopped = false
 
     public CustomMazeGenerator(int width, int height) {
         this.width = width
@@ -40,8 +41,8 @@ class CustomMazeGenerator extends MazeGenerator {
         Stack<Point> stack = new Stack<>()
 
         Point currentPoint = rollStartPoint()
-
-        while (this.visitedCounter < this.fieldsCount - 1 && !Thread.currentThread().isInterrupted()) {
+        isStopped = false
+        while (this.visitedCounter < this.fieldsCount - 1 && !isStopped) {
             Set<Point> neighbours = currentPoint.getNeighbours()
             Set<Point> unvisitedNeighbours = neighbours.findAll {
                 maze.pointHasAllWalls(it)
@@ -93,5 +94,11 @@ class CustomMazeGenerator extends MazeGenerator {
                 new Wall(new Point(x, y), new Point(x + 1, y))
             }
         }.flatten()
+    }
+
+    @Override
+    void interrupt(){
+        super.interrupt()
+        isStopped = true
     }
 }
