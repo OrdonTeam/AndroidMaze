@@ -13,13 +13,8 @@ import static com.ordonteam.model.elements.Point.p
 class Shadow implements Drawable {
     public Map<Point, Boolean> fields = new ConcurrentHashMap<>()
 
-    static Shadow noShadow(){
-        Shadow shadow = new Shadow()
-        shadow.show(p(0,0))
-        return shadow;
-    }
 
-    void init(int width, int height){
+   void init(int width, int height){
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 fields.put(p(i, j), false)
@@ -28,10 +23,10 @@ class Shadow implements Drawable {
     }
 
     void show(Point point) {
-        show(point,1)
+        showArea(point,1)
     }
 
-    void show(Point point, int range){
+    private void showArea(Point point, int range){
         for (int x = point.x-range; x <= point.x+range; x++) {
             for (int y = point.y-range; y <= point.y+range; y++) {
                 fields.put(p(x, y), true)

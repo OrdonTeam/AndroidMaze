@@ -3,6 +3,7 @@ import com.ordonteam.model.controllers.BotController
 import com.ordonteam.model.controllers.ShadowController
 import com.ordonteam.model.drawables.Bot
 import com.ordonteam.model.drawables.Maze
+import com.ordonteam.model.drawables.NoShadow
 import com.ordonteam.model.drawables.Shadow
 import pl.polidea.robospock.RoboSpecification
 
@@ -13,7 +14,7 @@ class BotControllerSpec extends RoboSpecification {
 
     def "setup"() {
         maze = new CustomMazeGenerator(10, 10).generate()
-        shadowController = new ShadowController(Shadow.noShadow())
+        shadowController = new ShadowController(maze,new NoShadow())
     }
 
     def "should create maze and shadow controller"() {
