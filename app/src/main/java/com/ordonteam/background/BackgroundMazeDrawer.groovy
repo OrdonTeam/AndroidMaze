@@ -11,10 +11,10 @@ import static com.ordonteam.commons.Util.startThread
 
 @CompileStatic
 public class BackgroundMazeDrawer implements InvalidateCallback, Runnable {
-    DrawableView view;
+    private DrawableView view;
     private final RepaintableMaze maze = new RepaintableMaze(20, 40, this)
     private volatile boolean isStopped = false
-    BackgroundMazeGenerator generator
+    private BackgroundMazeGenerator generator
 
     public DrawableView onCreate(Activity activity) {
         view = new DrawableView(activity, maze);

@@ -68,12 +68,8 @@ class CustomMazeGenerator extends MazeGenerator {
     }
 
     protected void fillWholeMaze() {
-        createHorizontalLines().each {
-            maze.addWall(it)
-        }
-        createVerticalLines().each {
-            maze.addWall(it)
-        }
+        maze.addWalls(createHorizontalLines())
+        maze.addWalls(createVerticalLines())
     }
 
     private Point rollStartPoint() {
