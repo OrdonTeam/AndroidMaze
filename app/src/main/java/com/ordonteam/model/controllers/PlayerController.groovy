@@ -1,4 +1,6 @@
 package com.ordonteam.model.controllers
+
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import com.ordonteam.commons.dimensions.Dimension
@@ -61,17 +63,26 @@ class PlayerController extends DrawableController implements View.OnTouchListene
     }
 
     private void movePlayer(MotionEvent event, Point playerPosition) {
-        if (event.y < event.x * drawableView.getHeight()/drawableView.getWidth()) {
-            if (event.y < 0 - event.x * drawableView.getHeight()/drawableView.getWidth() + drawableView.getHeight()) {
-                tryToMovePlayerUp()
-            } else {
+        float b1 = playerPosition.y - playerPosition.x
+        float b2 = playerPosition.x + playerPosition.y
+
+        float y1Eval = event.x + b1
+        float y2Eval = -event.x + b2
+
+        if( y1Eval < event.y ){
+            if( y2Eval < event.y){
+                tryToMovePlayerDown()
+            }
+            if( y2Eval >= event.y){
+                tryToMovePlayerLeft()
+            }
+        }
+        if( y1Eval >= event.y ){
+            if( y2Eval < event.y){
                 tryToMovePlayerRight()
             }
-        } else {
-            if (event.y < 0 - event.x * drawableView.getHeight()/drawableView.getWidth() + drawableView.getHeight()) {
-                tryToMovePlayerLeft()
-            } else {
-                tryToMovePlayerDown()
+            if( y2Eval >= event.y){
+                tryToMovePlayerUp()
             }
         }
         shadowController.show(player.point)
