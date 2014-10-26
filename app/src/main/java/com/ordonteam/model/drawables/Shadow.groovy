@@ -11,8 +11,18 @@ import java.util.concurrent.ConcurrentHashMap
 import static com.ordonteam.model.elements.Point.p
 
 class Shadow implements Drawable {
-    public Map<Point, Boolean> fields = new ConcurrentHashMap<>()
+   public Map<Point, Boolean> fields = new ConcurrentHashMap<>()
 
+
+   public static Shadow noShadow(){
+       return new Shadow(){
+           @Override
+           void show(Point point) {}
+
+           @Override
+           public void draw(ScalableCanvas canvas) {}
+       }
+   }
 
    void init(int width, int height){
         for (int i = 0; i < width; i++) {

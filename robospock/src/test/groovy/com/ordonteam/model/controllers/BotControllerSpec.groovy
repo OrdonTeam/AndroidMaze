@@ -14,7 +14,7 @@ class BotControllerSpec extends RoboSpecification {
 
     def "setup"() {
         maze = new CustomMazeGenerator(10, 10).generate()
-        shadowController = new ShadowController(maze,new NoShadow())
+        shadowController = new ShadowController(maze,Shadow.noShadow())
     }
 
     def "should create maze and shadow controller"() {
